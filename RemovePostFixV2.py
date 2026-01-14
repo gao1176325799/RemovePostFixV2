@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import re
+import os
 import argparse
 from dataclasses import dataclass
 from lxml import etree
@@ -104,7 +105,8 @@ def step2_remove_xcp_rx_tx_comsignals(root, NS):
         scanned += 1
         short_name = text_of(cv.find("a:SHORT-NAME", namespaces=NS))
 
-        if short_name.startswith("XCP_Rx") or short_name.startswith("XCP_Tx"):
+        short_name_l = short_name.lower()
+        if "xcp_rx" in short_name_l or "xcp_tx" in short_name_l:
             parent = cv.getparent()
             if parent is not None:
                 parent.remove(cv)
@@ -131,10 +133,15 @@ def main():
 
     # pipeline：按顺序执行各 step
     s1 = step1_remove_comsignal_without_ocan(root, NS, cfg)
+    temp_dir = os.path.dirname(args.out) or "."
+    temp_step1 = os.path.join(temp_dir, "2temp.arxml")
+    save_arxml_strict(tree, temp_step1)
     s2 = step2_remove_xcp_rx_tx_comsignals(root, NS)
+    temp_step2 = os.path.join(temp_dir, "3temp.arxml")
+    save_arxml_strict(tree, temp_step2)
 
     save_arxml_strict(tree, args.out)
 
-    print("[OK]", s1, s2, "out=", args.out)
+    print("[OK]", s1, s2, "out=", args.out, "temp_step1=", temp_step1, "temp_step2=", temp_step2)
 if __name__ == "__main__":
     main()

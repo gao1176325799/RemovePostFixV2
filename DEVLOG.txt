@@ -1,0 +1,6 @@
+## 2026.01.14
+
+- progress: Connected to Codex, initialized GitHub, and基本完成 Step1/Step2.
+- open_issue: 2 -> 3 step assigns ComHandleId unexpectedly.
+- next_step: Re-run the software operation for step 2 -> 3, record what changes, and confirm the correct expected output.
+

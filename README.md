@@ -53,7 +53,7 @@ python3 RemovePostFixV2.py \
 脚本执行完成后会输出删除统计：
 
 ```
-[OK] {'step': 1, 'scanned': 120, 'removed': 30} {'step': 2, 'scanned': 90, 'removed': 5, 'rule': 'SHORT-NAME startswith XCP_Rx / XCP_Tx'} out= output.arxml
+[OK] {'step': 1, 'scanned': 120, 'removed': 30} {'step': 2, 'scanned': 90, 'removed': 5, 'rule': 'SHORT-NAME startswith XCP_Rx / XCP_Tx'} out= output.arxml temp_step1= 2temp.arxml temp_step2= 3temp.arxml
 ```
 
 ## 测试阶段输出说明
